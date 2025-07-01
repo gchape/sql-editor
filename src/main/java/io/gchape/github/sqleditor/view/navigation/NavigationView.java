@@ -1,15 +1,15 @@
-package io.gchape.github.sqleditor.view;
+package io.gchape.github.sqleditor.view.navigation;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
-public enum OptionsView {
+public enum NavigationView {
     INSTANCE();
 
     private final HBox root;
 
-    OptionsView() {
+    NavigationView() {
         root = new HBox();
 
         build();

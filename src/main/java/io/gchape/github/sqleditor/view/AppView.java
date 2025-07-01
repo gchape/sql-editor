@@ -1,30 +1,33 @@
 package io.gchape.github.sqleditor.view;
 
+import io.gchape.github.sqleditor.view.editor.TabSqlEdView;
+import io.gchape.github.sqleditor.view.hierarchy.TreeView;
+import io.gchape.github.sqleditor.view.navigation.NavigationView;
 import javafx.scene.layout.*;
 
-public enum ApplicationView {
+public enum AppView {
     INSTANCE();
 
     private final GridPane root;
-    private final FileTreeView fileTreeView;
-    private final OptionsView optionsView;
-    private final SQLEditorView sqlEditorView;
+    private final TreeView treeView;
+    private final NavigationView navigationView;
+    private final TabSqlEdView tabSqlEdView;
 
-    ApplicationView() {
+    AppView() {
         root = new GridPane();
         root.getStyleClass().add("editor-view");
 
-        fileTreeView = FileTreeView.INSTANCE;
-        optionsView = OptionsView.INSTANCE;
-        sqlEditorView = SQLEditorView.INSTANCE;
+        treeView = TreeView.INSTANCE;
+        navigationView = NavigationView.INSTANCE;
+        tabSqlEdView = TabSqlEdView.INSTANCE;
 
         compose();
     }
 
     private void compose() {
-        var fileTree = fileTreeView.getView();
-        var options = optionsView.getView();
-        var editor = sqlEditorView.getView();
+        var fileTree = treeView.getView();
+        var options = navigationView.getView();
+        var editor = tabSqlEdView.getView();
 
         root.add(options, 0, 0, 2, 1); // span 2 columns
         root.add(fileTree, 0, 1);
@@ -38,8 +41,8 @@ public enum ApplicationView {
         GridPane.setVgrow(fileTree, Priority.ALWAYS);
 
         var col1 = new ColumnConstraints();
-        col1.setMinWidth(240);
-        col1.setMaxWidth(240);
+        col1.setMinWidth(200);
+        col1.setMaxWidth(200);
 
         var col2 = new ColumnConstraints();
         col2.setHgrow(Priority.ALWAYS);
