@@ -29,8 +29,7 @@ public enum TabbedSqlEditor {
 
         root.getChildren().addAll(tabPane, sqlEd);
 
-        tabPane.getTabs().add(new Tab("default"));
-        tabPane.getTabs().add(new Tab("default"));
+        tabPane.getTabs().add(new Tab("terminal.sql"));
     }
 
     public Region getView() {

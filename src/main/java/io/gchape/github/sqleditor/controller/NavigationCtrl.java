@@ -1,17 +1,17 @@
 package io.gchape.github.sqleditor.controller;
 
 import io.gchape.github.sqleditor.model.SharedModel;
-import io.gchape.github.sqleditor.view.header.Navigation;
+import io.gchape.github.sqleditor.view.Toolbar;
 import javafx.scene.layout.Region;
 
 public enum NavigationCtrl {
-    INSTANCE(Navigation.INSTANCE);
+    INSTANCE(Toolbar.INSTANCE);
 
     private final SharedModel sharedModel;
-    private final Navigation navigation;
+    private final Toolbar toolbar;
 
-    NavigationCtrl(final Navigation navigation) {
-        this.navigation = navigation;
+    NavigationCtrl(final Toolbar toolbar) {
+        this.toolbar = toolbar;
         this.sharedModel = SharedModel.INSTANCE;
 
         bind();
@@ -19,10 +19,10 @@ public enum NavigationCtrl {
 
     private void bind() {
         sharedModel.openedDirPathProperty()
-                .bind(navigation.openedDirPathProperty());
+                .bind(toolbar.projectPathProperty());
     }
 
     public Region getView() {
-        return navigation.getView();
+        return toolbar.getView();
     }
 }

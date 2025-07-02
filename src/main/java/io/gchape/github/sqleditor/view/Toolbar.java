@@ -1,6 +1,6 @@
-package io.gchape.github.sqleditor.view.header;
+package io.gchape.github.sqleditor.view;
 
-import io.gchape.github.sqleditor.view.builder.ButtonBuilder;
+import io.gchape.github.sqleditor.view.builder.FXControls;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Orientation;
@@ -13,21 +13,21 @@ import javafx.stage.DirectoryChooser;
 import static io.gchape.github.sqleditor.view.utils.Icons.fileIcon1;
 import static io.gchape.github.sqleditor.view.utils.Icons.folderIcon1;
 
-public enum Navigation {
+public enum Toolbar {
     INSTANCE();
 
     private final ToolBar root;
     private final DirectoryChooser directoryChooser;
-    private final StringProperty openedDirPath;
+    private final StringProperty projectPath;
 
     private Button openDirBtn;
     private Button createFileBtn;
 
-    Navigation() {
+    Toolbar() {
         root = new ToolBar();
         directoryChooser = new DirectoryChooser();
 
-        openedDirPath = new SimpleStringProperty("../");
+        projectPath = new SimpleStringProperty("../");
 
         build();
         setHandlers();
@@ -39,7 +39,7 @@ public enum Navigation {
             var selectedDir = directoryChooser.showDialog(window);
 
             if (selectedDir != null) {
-                openedDirPath.set(selectedDir.getAbsolutePath());
+                projectPath.set(selectedDir.getAbsolutePath());
             }
         });
     }
@@ -47,16 +47,16 @@ public enum Navigation {
     private void build() {
         root.setOrientation(Orientation.HORIZONTAL);
 
-        openDirBtn = new ButtonBuilder()
-                .setTitle("Open...")
+        openDirBtn = new FXControls.Type<>(Button.class)
+                .newInstance()
+                .setText("Open...")
                 .setGraphic(folderIcon1)
-                .setStyleClass("toolbar-btn")
                 .build();
 
-        createFileBtn = new ButtonBuilder()
-                .setTitle("New")
+        createFileBtn = new FXControls.Type<>(Button.class)
+                .newInstance()
+                .setText("New")
                 .setGraphic(fileIcon1)
-                .setStyleClass("toolbar-btn")
                 .build();
 
         root.getItems().addAll(createFileBtn, openDirBtn);
@@ -66,7 +66,7 @@ public enum Navigation {
         return root;
     }
 
-    public StringProperty openedDirPathProperty() {
-        return openedDirPath;
+    public StringProperty projectPathProperty() {
+        return projectPath;
     }
 }

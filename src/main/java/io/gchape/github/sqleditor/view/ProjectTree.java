@@ -1,4 +1,4 @@
-package io.gchape.github.sqleditor.view.hierarchy;
+package io.gchape.github.sqleditor.view;
 
 import io.gchape.github.sqleditor.view.utils.Icons;
 import javafx.application.Platform;
@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public enum FileTree {
+public enum ProjectTree {
     INSTANCE();
 
     private final TreeView<String> root;
 
-    FileTree() {
+    ProjectTree() {
         root = new TreeView<>(null);
         root.setCache(true);
         root.setShowRoot(false);

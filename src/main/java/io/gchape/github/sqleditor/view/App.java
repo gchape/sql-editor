@@ -5,7 +5,7 @@ import io.gchape.github.sqleditor.controller.NavigationCtrl;
 import io.gchape.github.sqleditor.view.editor.TabbedSqlEditor;
 import javafx.scene.layout.*;
 
-public enum Application {
+public enum App {
     INSTANCE();
 
     private final GridPane root;
@@ -13,7 +13,7 @@ public enum Application {
     private final NavigationCtrl navigationCtrl;
     private final TabbedSqlEditor tabbedSqlEditor;
 
-    Application() {
+    App() {
         root = new GridPane();
         root.getStyleClass().add("editor-view");
 

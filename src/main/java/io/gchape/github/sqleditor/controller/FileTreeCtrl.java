@@ -1,19 +1,19 @@
 package io.gchape.github.sqleditor.controller;
 
 import io.gchape.github.sqleditor.model.SharedModel;
-import io.gchape.github.sqleditor.view.hierarchy.FileTree;
+import io.gchape.github.sqleditor.view.ProjectTree;
 import javafx.scene.layout.Region;
 
 import java.nio.file.Path;
 
 public enum FileTreeCtrl {
-    INSTANCE(FileTree.INSTANCE);
+    INSTANCE(ProjectTree.INSTANCE);
 
-    private final FileTree fileTree;
+    private final ProjectTree projectTree;
     private final SharedModel sharedModel;
 
-    FileTreeCtrl(final FileTree fileTree) {
-        this.fileTree = fileTree;
+    FileTreeCtrl(final ProjectTree projectTree) {
+        this.projectTree = projectTree;
         this.sharedModel = SharedModel.INSTANCE;
 
         setHandlers();
@@ -24,12 +24,12 @@ public enum FileTreeCtrl {
             if (absolutePath != null) {
                 var selectedPath = Path.of(absolutePath);
 
-                fileTree.render(selectedPath);
+                projectTree.render(selectedPath);
             }
         });
     }
 
     public Region getView() {
-        return fileTree.getView();
+        return projectTree.getView();
     }
 }
