@@ -1,0 +1,85 @@
+* {
+    -color-dark-gray: #3a3f46;
+    -color-mid-gray: #4b5158;
+    -color-text-light: #ddd;
+
+    -color-tab-header-bg: #2b2b2b;
+    -color-tab-selected-bg: #d97b38;
+
+    -color-tab-text-selected: #eee7dd;
+    -color-tab-text-unselected: rgba(255, 255, 255, 0.7);
+
+    -fx-font-size: 12px;
+    -fx-focus-color: #3c3f41;
+
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-bar {
+    -fx-padding: 6 12;
+    -fx-background-color: -color-dark-gray;
+    -fx-alignment: center-left;
+    -fx-border-color: -color-mid-gray;
+    -fx-border-width: 0 0 1 0;
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-light;
+}
+
+.tool-bar {
+    -fx-background-color: transparent;
+    -fx-spacing: 8;
+    -fx-padding: 0;
+}
+.toolbar-btn {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-text-light;
+    -fx-padding: 3 6;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-graphic-text-gap: 6;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+.toolbar-btn:hover {
+    -fx-background-color: -color-mid-gray;
+    -fx-text-fill: white;
+}
+
+.tab-header-area .tab-header-background {
+    -fx-background-color: -color-tab-header-bg;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: -color-tab-selected-bg;
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+.tab .tab-label {
+    -fx-text-fill: -color-tab-text-unselected;
+    -fx-alignment: CENTER;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 8 0 8;
+}
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: -color-tab-text-selected;
+}
+.tab-pane:top *.tab-header-area {
+    -fx-padding: 0;
+}
+.tab-pane {
+    -fx-tab-min-height: 28px;
+    -fx-tab-max-height: 28px;
+    -fx-background-color: transparent;
+}
+.tab-pane .tab {
+    -fx-background-color: transparent;
+}
+
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+    -fx-border-insets: 0 0 0 0;
+    -fx-border-radius: 0;
+}
