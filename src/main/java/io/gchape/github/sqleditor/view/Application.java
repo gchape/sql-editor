@@ -3,7 +3,6 @@ package io.gchape.github.sqleditor.view;
 import io.gchape.github.sqleditor.controller.FileTreeCtrl;
 import io.gchape.github.sqleditor.controller.NavigationCtrl;
 import io.gchape.github.sqleditor.view.editor.TabbedSqlEditor;
-import io.gchape.github.sqleditor.view.hierarchy.FileTree;
 import javafx.scene.layout.*;
 
 public enum Application {
@@ -27,14 +26,14 @@ public enum Application {
 
     private void compose() {
         var fileTree = fileTreeCtrl.getView();
-        var options = navigationCtrl.getView();
+        var navigation = navigationCtrl.getView();
         var editor = tabbedSqlEditor.getView();
 
-        root.add(options, 0, 0, 2, 1);
+        root.add(navigation, 0, 0, 2, 1);
         root.add(fileTree, 0, 1);
         root.add(editor, 1, 1);
 
-        GridPane.setHgrow(options, Priority.ALWAYS);
+        GridPane.setHgrow(navigation, Priority.ALWAYS);
 
         GridPane.setHgrow(editor, Priority.ALWAYS);
         GridPane.setVgrow(editor, Priority.ALWAYS);

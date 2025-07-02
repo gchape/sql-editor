@@ -7,7 +7,6 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.DirectoryChooser;
 
@@ -17,8 +16,7 @@ import static io.gchape.github.sqleditor.view.utils.Icons.folderIcon1;
 public enum Navigation {
     INSTANCE();
 
-    private final HBox root;
-    private final ToolBar toolBar;
+    private final ToolBar root;
     private final DirectoryChooser directoryChooser;
     private final StringProperty openedDirPath;
 
@@ -26,18 +24,13 @@ public enum Navigation {
     private Button createFileBtn;
 
     Navigation() {
-        root = new HBox();
-        toolBar = new ToolBar();
+        root = new ToolBar();
         directoryChooser = new DirectoryChooser();
-
-        root.getStyleClass().add("nav-bar");
-        toolBar.getStyleClass().add("tool-bar");
 
         openedDirPath = new SimpleStringProperty("../");
 
         build();
         setHandlers();
-        bind();
     }
 
     private void setHandlers() {
@@ -51,11 +44,8 @@ public enum Navigation {
         });
     }
 
-    private void bind() {
-    }
-
     private void build() {
-        toolBar.setOrientation(Orientation.HORIZONTAL);
+        root.setOrientation(Orientation.HORIZONTAL);
 
         openDirBtn = new ButtonBuilder()
                 .setTitle("Open...")
@@ -69,8 +59,7 @@ public enum Navigation {
                 .setStyleClass("toolbar-btn")
                 .build();
 
-        toolBar.getItems().addAll(createFileBtn, openDirBtn);
-        root.getChildren().add(toolBar);
+        root.getItems().addAll(createFileBtn, openDirBtn);
     }
 
     public Region getView() {

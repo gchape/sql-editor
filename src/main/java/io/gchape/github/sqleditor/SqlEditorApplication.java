@@ -1,6 +1,6 @@
 package io.gchape.github.sqleditor;
 
-import io.gchape.github.sqleditor.controller.SceneCtrl;
+import io.gchape.github.sqleditor.controller.scene.SceneCtrl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

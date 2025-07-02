@@ -9,11 +9,11 @@ import java.nio.file.Path;
 public enum FileTreeCtrl {
     INSTANCE(FileTree.INSTANCE);
 
-    private final FileTree fileTreeView;
+    private final FileTree fileTree;
     private final SharedModel sharedModel;
 
-    FileTreeCtrl(final FileTree fileTreeView) {
-        this.fileTreeView = fileTreeView;
+    FileTreeCtrl(final FileTree fileTree) {
+        this.fileTree = fileTree;
         this.sharedModel = SharedModel.INSTANCE;
 
         setHandlers();
@@ -24,12 +24,12 @@ public enum FileTreeCtrl {
             if (absolutePath != null) {
                 var selectedPath = Path.of(absolutePath);
 
-                fileTreeView.render(selectedPath);
+                fileTree.render(selectedPath);
             }
         });
     }
 
     public Region getView() {
-        return fileTreeView.getView();
+        return fileTree.getView();
     }
 }

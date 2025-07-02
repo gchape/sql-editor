@@ -8,10 +8,10 @@ public enum NavigationCtrl {
     INSTANCE(Navigation.INSTANCE);
 
     private final SharedModel sharedModel;
-    private final Navigation navigationView;
+    private final Navigation navigation;
 
-    NavigationCtrl(final Navigation navigationView) {
-        this.navigationView = navigationView;
+    NavigationCtrl(final Navigation navigation) {
+        this.navigation = navigation;
         this.sharedModel = SharedModel.INSTANCE;
 
         bind();
@@ -19,10 +19,10 @@ public enum NavigationCtrl {
 
     private void bind() {
         sharedModel.openedDirPathProperty()
-                .bind(navigationView.openedDirPathProperty());
+                .bind(navigation.openedDirPathProperty());
     }
 
     public Region getView() {
-        return navigationView.getView();
+        return navigation.getView();
     }
 }

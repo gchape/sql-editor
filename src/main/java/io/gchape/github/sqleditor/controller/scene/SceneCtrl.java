@@ -1,4 +1,4 @@
-package io.gchape.github.sqleditor.controller;
+package io.gchape.github.sqleditor.controller.scene;
 
 import io.gchape.github.sqleditor.view.Application;
 import javafx.scene.Scene;

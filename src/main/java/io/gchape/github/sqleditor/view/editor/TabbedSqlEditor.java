@@ -1,5 +1,6 @@
 package io.gchape.github.sqleditor.view.editor;
 
+import javafx.geometry.Side;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Priority;
@@ -16,6 +17,7 @@ public enum TabbedSqlEditor {
     TabbedSqlEditor() {
         root = new VBox();
         tabPane = new TabPane();
+        tabPane.setSide(Side.BOTTOM);
         sqlEditor = SqlEditor.INSTANCE;
 
         build();
@@ -23,14 +25,12 @@ public enum TabbedSqlEditor {
 
     private void build() {
         final var sqlEd = sqlEditor.getView();
+        VBox.setVgrow(sqlEd, Priority.ALWAYS);
 
         root.getChildren().addAll(tabPane, sqlEd);
 
-        VBox.setVgrow(sqlEd, Priority.ALWAYS);
-        tabPane.getStyleClass().add("tab-pane");
         tabPane.getTabs().add(new Tab("default"));
         tabPane.getTabs().add(new Tab("default"));
-
     }
 
     public Region getView() {

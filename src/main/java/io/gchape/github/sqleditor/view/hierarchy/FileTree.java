@@ -17,10 +17,8 @@ public enum FileTree {
 
     FileTree() {
         root = new TreeView<>(null);
-        root.setShowRoot(false);
         root.setCache(true);
-
-        root.getStyleClass().add("file-tree");
+        root.setShowRoot(false);
     }
 
     public Region getView() {

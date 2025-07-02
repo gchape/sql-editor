@@ -7,4 +7,5 @@ module io.gchape.github.sqleditor {
 
     exports io.gchape.github.sqleditor;
     exports io.gchape.github.sqleditor.controller;
+    exports io.gchape.github.sqleditor.controller.scene;
 }
