@@ -18,10 +18,8 @@
     -color-bg-dark: #2b2b2b;
     -color-bg-mid: #3d4450;
     -color-bg-light: #4a5160;
-    -color-bg-lighter: #545d6e;
 
     /* Component Specific */
-    -color-nav-bar-bg: #484f5c;
     -color-tree-bg: #2a2a2a;
     -color-tab-bg: #353535;
     -color-border: #555555;
@@ -37,7 +35,6 @@
     /* Text Colors */
     -color-text-main: #e8e8e8;
     -color-text-subtle: rgba(255, 255, 255, 0.75);
-    -color-text-muted: rgba(255, 255, 255, 0.6);
     -color-text-selected: #2e2e2e;
     -color-text-bright: #ffffff;
 
@@ -227,8 +224,8 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: linear-gradient(to bottom, -color-accent-soft, -color-accent);
-    -fx-opacity: 0.3;
+    -fx-background-color: gray;
+    -fx-opacity: 0.2;
     -fx-background-radius: 0;
     -fx-background-insets: 0;
 }
@@ -241,67 +238,61 @@
     -fx-border-color: -color-border;
 }
 
-/* Focus Indicators */
-.button:focused,
-.text-field:focused,
-.text-area:focused {
-    -fx-border-color: -color-accent;
-    -fx-border-width: 2;
-}
-
 /* Base text area styles */
-.text-area.fringe,
-.text-area.code-area {
+.text-area.fringe, .text-area.code-area {
     -fx-padding: 0;
     -fx-border-width: 0;
     -fx-background-insets: 0;
     -fx-border-insets: 0;
 }
 
-/* Fringe (line numbers) sizing */
+/* Unified styling for both fringe and code area */
+.text-area.fringe, .text-area.code-area {
+    -fx-background-color: #1a1a1a;
+    -fx-control-inner-background: #1a1a1a;
+    -fx-highlight-fill: #4d8cdb;
+    -fx-highlight-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-text-fill: #32CD32;
+    -fx-font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Consolas", monospace;
+    -fx-font-weight: normal;
+}
+
+/* Fringe (line numbers) specific sizing */
 .text-area.fringe {
     -fx-min-width: 50.0;
     -fx-max-width: 50.0;
     -fx-pref-width: 50.0;
+    -fx-text-fill: #6a6a6a;
 }
 
-/* Content styling for both areas */
+/* Content styling */
 .text-area.fringe .content {
-    -fx-background-color: #2b2d30;
-    -fx-text-fill: #6e7681;
-    -fx-font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Consolas", monospace;
-    -fx-font-size: 13px;
-    -fx-font-weight: normal;
-    -fx-padding: 8px 12px 8px 8px;
+    -fx-padding: 8px 8px 8px 4px;
     -fx-text-alignment: right;
-    -fx-border-color: #3d4147;
+    -fx-border-color: #333333;
     -fx-border-width: 0 1px 0 0;
+    -fx-border-style: solid;
+    -fx-background-radius: 0;
+    -fx-background-color: #1a1a1a;
 }
+
 .text-area.code-area .content {
-    -fx-background-color: #1e1f22;
-    -fx-text-fill: #bcbec4;
-    -fx-font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Consolas", monospace;
-    -fx-font-size: 14px;
-    -fx-font-weight: normal;
     -fx-padding: 8px 12px;
-    -fx-line-spacing: 2px;
+    -fx-line-spacing: 3px;
+    -fx-background-radius: 0;
 }
 
-/* Selection styling */
-.text-area.code-area .text {
-    -fx-highlight-fill: #264f78;
-    -fx-highlight-text-fill: #ffffff;
+/* Enhanced selection styling */
+.text-area.fringe .text, .text-area.code-area .text {
+    -fx-highlight-fill: #00ff00;
+    -fx-highlight-text-fill: #000000;
+    -fx-selection-fill: #00ff00;
+    -fx-selection-text-fill: #000000;
 }
 
-/* Caret styling */
-.text-area.code-area .caret {
-    -fx-stroke: #bcbec4;
-    -fx-stroke-width: 1.5px;
-}
-
-/* Remove all focus effects */
-.text-area.fringe:focused,
-.text-area.code-area:focused {
+/* Remove all focus effects while maintaining functionality */
+.text-area.fringe:focused, .text-area.code-area:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-background-insets: 0;
@@ -309,86 +300,75 @@
     -fx-effect: none;
     -fx-scale-x: 1;
     -fx-scale-y: 1;
-    -fx-background-color: transparent;
+    -fx-background-color: #1a1a1a;
+    -fx-control-inner-background: #1a1a1a;
 }
 
 /* Scroll pane styling */
-.text-area.fringe .scroll-pane,
-.text-area.code-area .scroll-pane {
-    -fx-background-color: transparent;
+.text-area.fringe .scroll-pane, .text-area.code-area .scroll-pane {
+    -fx-background-color: #1a1a1a;
     -fx-background-insets: 0;
     -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
 }
 
-/* Viewport styling */
-.text-area.fringe .viewport,
-.text-area.code-area .viewport {
+/* Additional fringe scroll pane fixes */
+.text-area.fringe .scroll-pane {
+    -fx-background-color: #1a1a1a;
+    -fx-control-inner-background: #1a1a1a;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+}
+
+.text-area.fringe .scroll-pane .viewport {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+/* Custom scrollbar for code area */
+.text-area.code-area .scroll-bar:horizontal, .text-area.code-area .scroll-bar:vertical, .text-area.code-area .scroll-bar .track {
     -fx-background-color: transparent;
-}
-
-/* Scrollbar styling for code area */
-.text-area.code-area .scroll-bar:vertical {
-    -fx-background-color: #2b2d30;
-    -fx-pref-width: 12px;
-}
-
-.text-area.code-area .scroll-bar:horizontal {
-    -fx-background-color: #2b2d30;
-    -fx-pref-height: 12px;
+    -fx-background-radius: 0;
 }
 
 .text-area.code-area .scroll-bar .thumb {
-    -fx-background-color: #5a5d63;
-    -fx-background-radius: 6px;
-    -fx-border-radius: 6px;
+    -fx-background-color: gray;
+    -fx-background-radius: 0;
+    -fx-border-radius: 3;
+    -fx-opacity: 0.2;
 }
 
-.text-area.code-area .scroll-bar .thumb:hover {
-    -fx-background-color: #6e7681;
-}
-
-.text-area.code-area .scroll-bar .track {
-    -fx-background-color: transparent;
-}
-
-.text-area.code-area .scroll-bar .increment-button,
-.text-area.code-area .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
+.text-area.code-area .scroll-bar .increment-button, .text-area.code-area .scroll-bar .decrement-button {
+    -fx-background-color: #111111;
     -fx-pref-width: 0;
     -fx-pref-height: 0;
+    -fx-shape: null;
 }
 
-/* Hide scrollbars for fringe */
-.text-area.fringe .scroll-bar {
+/* Completely hide fringe scrollbars */
+.text-area.fringe .scroll-pane .scroll-bar:vertical, .text-area.fringe .scroll-pane .scroll-bar:horizontal {
     -fx-pref-width: 0;
     -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
     -fx-opacity: 0;
+    -fx-background-color: transparent;
+}
+
+.text-area.fringe .scroll-bar .track, .text-area.fringe .scroll-bar .thumb, .text-area.fringe .scroll-bar .increment-button, .text-area.fringe .scroll-bar .decrement-button {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
 }
 
 /* Corner styling */
 .text-area.code-area .corner {
-    -fx-background-color: #2b2d30;
-}
-
-/* Hover effects for better UX */
-.text-area.code-area:hover .content {
-    -fx-background-color: #1f2024;
-}
-
-/* Dark theme syntax highlighting helpers */
-.text-area.code-area .content .keyword {
-    -fx-fill: #569cd6;
-}
-
-.text-area.code-area .content .string {
-    -fx-fill: #ce9178;
-}
-
-.text-area.code-area .content .comment {
-    -fx-fill: #6a9955;
-    -fx-font-style: italic;
-}
-
-.text-area.code-area .content .number {
-    -fx-fill: #b5cea8;
+    -fx-background-color: transparent;
 }
