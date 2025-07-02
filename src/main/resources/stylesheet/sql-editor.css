@@ -250,7 +250,7 @@
 .text-area.fringe, .text-area.code-area {
     -fx-background-color: #1a1a1a;
     -fx-control-inner-background: #1a1a1a;
-    -fx-highlight-fill: #4d8cdb;
+    -fx-highlight-fill: #555555;
     -fx-highlight-text-fill: #fff;
     -fx-font-size: 14px;
     -fx-text-fill: #32CD32;

@@ -5,6 +5,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
+import java.util.stream.IntStream;
+
 public enum SqlEditor {
     INSTANCE();
 
@@ -19,15 +21,14 @@ public enum SqlEditor {
 
         configure();
         setHandlers();
-        updateLineNumbers();
     }
 
     private void setHandlers() {
-        codeArea.textProperty().subscribe(this::updateLineNumbers);
+        codeArea.textProperty().subscribe(this::updateFringe);
         fringe.scrollTopProperty().bindBidirectional(codeArea.scrollTopProperty());
     }
 
-    private void updateLineNumbers() {
+    private void updateFringe() {
         String text = codeArea.getText();
         if (text == null || text.isEmpty()) {
             fringe.setText("1");
@@ -35,14 +36,11 @@ public enum SqlEditor {
         }
 
         var lines = text.split("\n", -1);
-        var lineCount = lines.length;
         var lineNumbers = new StringBuilder();
-        for (int i = 1; i <= lineCount; i++) {
-            lineNumbers.append(i);
-            if (i < lineCount) {
-                lineNumbers.append(System.lineSeparator());
-            }
-        }
+
+        IntStream.range(1, lines.length).forEachOrdered(i ->
+                lineNumbers.append(i).append(System.lineSeparator()));
+        lineNumbers.append(lines.length);
 
         fringe.setText(lineNumbers.toString());
     }
@@ -51,12 +49,12 @@ public enum SqlEditor {
         HBox.setHgrow(fringe, Priority.NEVER);
         HBox.setHgrow(codeArea, Priority.ALWAYS);
 
-        fringe.getStyleClass().add("fringe");
         fringe.setEditable(false);
+        codeArea.setFocusTraversable(false);
         fringe.setFocusTraversable(false);
 
+        fringe.getStyleClass().add("fringe");
         codeArea.getStyleClass().add("code-area");
-        codeArea.setFocusTraversable(false);
 
         root.getChildren().addAll(fringe, codeArea);
     }
