@@ -1,35 +1,36 @@
 package io.gchape.github.sqleditor.view;
 
+import io.gchape.github.sqleditor.controller.FileTreeCtrl;
+import io.gchape.github.sqleditor.controller.NavigationCtrl;
 import io.gchape.github.sqleditor.view.editor.TabbedSqlEditor;
 import io.gchape.github.sqleditor.view.hierarchy.FileTree;
-import io.gchape.github.sqleditor.view.header.Navigation;
 import javafx.scene.layout.*;
 
 public enum Application {
     INSTANCE();
 
     private final GridPane root;
-    private final FileTree fileTree;
-    private final Navigation navigation;
+    private final FileTreeCtrl fileTreeCtrl;
+    private final NavigationCtrl navigationCtrl;
     private final TabbedSqlEditor tabbedSqlEditor;
 
     Application() {
         root = new GridPane();
         root.getStyleClass().add("editor-view");
 
-        fileTree = FileTree.INSTANCE;
-        navigation = Navigation.INSTANCE;
+        fileTreeCtrl = FileTreeCtrl.INSTANCE;
+        navigationCtrl = NavigationCtrl.INSTANCE;
         tabbedSqlEditor = TabbedSqlEditor.INSTANCE;
 
         compose();
     }
 
     private void compose() {
-        var fileTree = this.fileTree.getView();
-        var options = navigation.getView();
+        var fileTree = fileTreeCtrl.getView();
+        var options = navigationCtrl.getView();
         var editor = tabbedSqlEditor.getView();
 
-        root.add(options, 0, 0, 2, 1); // span 2 columns
+        root.add(options, 0, 0, 2, 1);
         root.add(fileTree, 0, 1);
         root.add(editor, 1, 1);
 
@@ -58,7 +59,6 @@ public enum Application {
 
         root.getRowConstraints().addAll(row1, row2);
     }
-
 
     public final Region getView() {
         return root;

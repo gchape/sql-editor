@@ -1,5 +1,6 @@
 package io.gchape.github.sqleditor.view.hierarchy;
 
+import io.gchape.github.sqleditor.view.utils.Icons;
 import javafx.application.Platform;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -15,7 +16,10 @@ public enum FileTree {
     private final TreeView<String> root;
 
     FileTree() {
-        root = new TreeView<>();
+        root = new TreeView<>(null);
+        root.setShowRoot(false);
+        root.setCache(true);
+
         root.getStyleClass().add("file-tree");
     }
 
@@ -31,13 +35,17 @@ public enum FileTree {
 
     private TreeItem<String> renderRecursive(final Path dir) {
         final var current = new TreeItem<>(dir.getFileName().toString());
+        current.setGraphic(Icons.newFolderIcon2());
 
         try (var children = Files.list(dir)) {
             children.forEach(child -> {
                 if (Files.isDirectory(child)) {
                     current.getChildren().add(renderRecursive(child));
                 } else {
-                    current.getChildren().add(new TreeItem<>(child.getFileName().toString()));
+                    final var treeItem = new TreeItem<>(child.getFileName().toString());
+                    treeItem.setGraphic(Icons.newFileIcon2());
+
+                    current.getChildren().add(treeItem);
                 }
             });
         } catch (IOException e) {
