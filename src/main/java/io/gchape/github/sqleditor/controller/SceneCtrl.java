@@ -1,16 +1,16 @@
 package io.gchape.github.sqleditor.controller;
 
-import io.gchape.github.sqleditor.view.AppView;
+import io.gchape.github.sqleditor.view.Application;
 import javafx.scene.Scene;
 
 public enum SceneCtrl {
     INSTANCE();
 
-    private final AppView root;
+    private final Application root;
     private final Scene scene;
 
     SceneCtrl() {
-        root = AppView.INSTANCE;
+        root = Application.INSTANCE;
         scene = new Scene(root.getView());
     }
 

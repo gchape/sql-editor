@@ -5,12 +5,12 @@ import javafx.scene.paint.Color;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 
-public enum SqlEdView {
+public enum SqlEditor {
     INSTANCE();
 
     private final CodeArea codeArea;
 
-    SqlEdView() {
+    SqlEditor() {
         codeArea = new CodeArea();
         codeArea.setLineHighlighterOn(true);
         codeArea.setLineHighlighterFill(Color.rgb(220, 220, 255, 0.4));

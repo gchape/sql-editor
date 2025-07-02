@@ -6,27 +6,28 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-public enum TabSqlEdView {
+public enum TabbedSqlEditor {
     INSTANCE();
 
     private final VBox root;
     private final TabPane tabPane;
-    private final SqlEdView sqlEdView;
+    private final SqlEditor sqlEditor;
 
-    TabSqlEdView() {
+    TabbedSqlEditor() {
         root = new VBox();
         tabPane = new TabPane();
-        sqlEdView = SqlEdView.INSTANCE;
+        sqlEditor = SqlEditor.INSTANCE;
 
         build();
     }
 
     private void build() {
-        final var sqlEd = sqlEdView.getView();
+        final var sqlEd = sqlEditor.getView();
 
         root.getChildren().addAll(tabPane, sqlEd);
 
         VBox.setVgrow(sqlEd, Priority.ALWAYS);
+        tabPane.getStyleClass().add("tab-pane");
         tabPane.getTabs().add(new Tab("default"));
         tabPane.getTabs().add(new Tab("default"));
 

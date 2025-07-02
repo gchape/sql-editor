@@ -2,19 +2,21 @@ package io.gchape.github.sqleditor.view.hierarchy;
 
 import javafx.application.Platform;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public enum TreeView {
+public enum FileTree {
     INSTANCE();
 
-    private final javafx.scene.control.TreeView<String> root;
+    private final TreeView<String> root;
 
-    TreeView() {
-        root = new javafx.scene.control.TreeView<>();
+    FileTree() {
+        root = new TreeView<>();
+        root.getStyleClass().add("file-tree");
     }
 
     public Region getView() {

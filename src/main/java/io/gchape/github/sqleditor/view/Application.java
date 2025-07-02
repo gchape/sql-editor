@@ -1,33 +1,33 @@
 package io.gchape.github.sqleditor.view;
 
-import io.gchape.github.sqleditor.view.editor.TabSqlEdView;
-import io.gchape.github.sqleditor.view.hierarchy.TreeView;
-import io.gchape.github.sqleditor.view.navigation.NavigationView;
+import io.gchape.github.sqleditor.view.editor.TabbedSqlEditor;
+import io.gchape.github.sqleditor.view.hierarchy.FileTree;
+import io.gchape.github.sqleditor.view.header.Navigation;
 import javafx.scene.layout.*;
 
-public enum AppView {
+public enum Application {
     INSTANCE();
 
     private final GridPane root;
-    private final TreeView treeView;
-    private final NavigationView navigationView;
-    private final TabSqlEdView tabSqlEdView;
+    private final FileTree fileTree;
+    private final Navigation navigation;
+    private final TabbedSqlEditor tabbedSqlEditor;
 
-    AppView() {
+    Application() {
         root = new GridPane();
         root.getStyleClass().add("editor-view");
 
-        treeView = TreeView.INSTANCE;
-        navigationView = NavigationView.INSTANCE;
-        tabSqlEdView = TabSqlEdView.INSTANCE;
+        fileTree = FileTree.INSTANCE;
+        navigation = Navigation.INSTANCE;
+        tabbedSqlEditor = TabbedSqlEditor.INSTANCE;
 
         compose();
     }
 
     private void compose() {
-        var fileTree = treeView.getView();
-        var options = navigationView.getView();
-        var editor = tabSqlEdView.getView();
+        var fileTree = this.fileTree.getView();
+        var options = navigation.getView();
+        var editor = tabbedSqlEditor.getView();
 
         root.add(options, 0, 0, 2, 1); // span 2 columns
         root.add(fileTree, 0, 1);

@@ -4,7 +4,6 @@ module io.gchape.github.sqleditor {
     requires java.desktop;
     requires jdk.compiler;
     requires org.fxmisc.richtext;
-    requires java.logging;
 
     exports io.gchape.github.sqleditor;
     exports io.gchape.github.sqleditor.controller;
