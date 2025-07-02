@@ -24,19 +24,22 @@ public enum SqlEditor {
     }
 
     private void setHandlers() {
-        codeArea.textProperty().subscribe(this::updateFringe);
-        fringe.scrollTopProperty().bindBidirectional(codeArea.scrollTopProperty());
+        codeArea.textProperty()
+                .subscribe(this::updateFringe);
+
+        fringe.scrollTopProperty()
+                .bindBidirectional(codeArea.scrollTopProperty());
     }
 
     private void updateFringe() {
-        String text = codeArea.getText();
+        final var text = codeArea.getText();
         if (text == null || text.isEmpty()) {
             fringe.setText("1");
             return;
         }
 
-        var lines = text.split("\n", -1);
-        var lineNumbers = new StringBuilder();
+        final var lines = text.split("\n", -1);
+        final var lineNumbers = new StringBuilder();
 
         IntStream.range(1, lines.length).forEachOrdered(i ->
                 lineNumbers.append(i).append(System.lineSeparator()));

@@ -20,8 +20,8 @@ public enum Toolbar {
     private final DirectoryChooser directoryChooser;
     private final StringProperty projectPath;
 
-    private Button openDirBtn;
-    private Button createFileBtn;
+    private Button newFileBtn;
+    private Button openProjectBtn;
 
     Toolbar() {
         root = new ToolBar();
@@ -34,7 +34,7 @@ public enum Toolbar {
     }
 
     private void setHandlers() {
-        openDirBtn.setOnMouseClicked(e -> {
+        openProjectBtn.setOnMouseClicked(e -> {
             var window = ((Node) e.getSource()).getScene().getWindow();
             var selectedDir = directoryChooser.showDialog(window);
 
@@ -45,21 +45,22 @@ public enum Toolbar {
     }
 
     private void build() {
+        root.setCache(true);
         root.setOrientation(Orientation.HORIZONTAL);
 
-        openDirBtn = new FXControls.Type<>(Button.class)
+        openProjectBtn = new FXControls.Type<>(Button.class)
                 .newInstance()
                 .setText("Open...")
                 .setGraphic(folderIcon1)
                 .build();
 
-        createFileBtn = new FXControls.Type<>(Button.class)
+        newFileBtn = new FXControls.Type<>(Button.class)
                 .newInstance()
                 .setText("New")
                 .setGraphic(fileIcon1)
                 .build();
 
-        root.getItems().addAll(createFileBtn, openDirBtn);
+        root.getItems().addAll(newFileBtn, openProjectBtn);
     }
 
     public Region getView() {

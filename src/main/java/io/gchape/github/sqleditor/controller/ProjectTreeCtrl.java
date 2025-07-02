@@ -6,13 +6,13 @@ import javafx.scene.layout.Region;
 
 import java.nio.file.Path;
 
-public enum FileTreeCtrl {
+public enum ProjectTreeCtrl {
     INSTANCE(ProjectTree.INSTANCE);
 
     private final ProjectTree projectTree;
     private final SharedModel sharedModel;
 
-    FileTreeCtrl(final ProjectTree projectTree) {
+    ProjectTreeCtrl(final ProjectTree projectTree) {
         this.projectTree = projectTree;
         this.sharedModel = SharedModel.INSTANCE;
 

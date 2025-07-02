@@ -1,7 +1,7 @@
 package io.gchape.github.sqleditor.view;
 
-import io.gchape.github.sqleditor.controller.FileTreeCtrl;
-import io.gchape.github.sqleditor.controller.NavigationCtrl;
+import io.gchape.github.sqleditor.controller.ProjectTreeCtrl;
+import io.gchape.github.sqleditor.controller.ToolbarCtrl;
 import io.gchape.github.sqleditor.view.editor.TabbedSqlEditor;
 import javafx.scene.layout.*;
 
@@ -9,24 +9,24 @@ public enum App {
     INSTANCE();
 
     private final GridPane root;
-    private final FileTreeCtrl fileTreeCtrl;
-    private final NavigationCtrl navigationCtrl;
+    private final ProjectTreeCtrl projectTreeCtrl;
+    private final ToolbarCtrl toolbarCtrl;
     private final TabbedSqlEditor tabbedSqlEditor;
 
     App() {
         root = new GridPane();
         root.getStyleClass().add("editor-view");
 
-        fileTreeCtrl = FileTreeCtrl.INSTANCE;
-        navigationCtrl = NavigationCtrl.INSTANCE;
+        projectTreeCtrl = ProjectTreeCtrl.INSTANCE;
+        toolbarCtrl = ToolbarCtrl.INSTANCE;
         tabbedSqlEditor = TabbedSqlEditor.INSTANCE;
 
         compose();
     }
 
     private void compose() {
-        var fileTree = fileTreeCtrl.getView();
-        var navigation = navigationCtrl.getView();
+        var fileTree = projectTreeCtrl.getView();
+        var navigation = toolbarCtrl.getView();
         var editor = tabbedSqlEditor.getView();
 
         root.add(navigation, 0, 0, 2, 1);

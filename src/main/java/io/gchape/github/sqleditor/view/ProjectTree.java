@@ -17,7 +17,6 @@ public enum ProjectTree {
 
     ProjectTree() {
         root = new TreeView<>(null);
-        root.setCache(true);
         root.setShowRoot(false);
     }
 
@@ -25,10 +24,13 @@ public enum ProjectTree {
         return root;
     }
 
-    public void render(final Path dir) {
-        final var root = renderRecursive(dir);
+    public void render(final Path projectPath) {
+        final var treeRoot = renderRecursive(projectPath);
 
-        Platform.runLater(() -> this.root.setRoot(root));
+        Platform.runLater(() -> {
+            root.setRoot(treeRoot);
+            root.setCache(true);
+        });
     }
 
     private TreeItem<String> renderRecursive(final Path dir) {

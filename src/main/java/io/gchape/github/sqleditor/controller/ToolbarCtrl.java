@@ -4,13 +4,13 @@ import io.gchape.github.sqleditor.model.SharedModel;
 import io.gchape.github.sqleditor.view.Toolbar;
 import javafx.scene.layout.Region;
 
-public enum NavigationCtrl {
+public enum ToolbarCtrl {
     INSTANCE(Toolbar.INSTANCE);
 
     private final SharedModel sharedModel;
     private final Toolbar toolbar;
 
-    NavigationCtrl(final Toolbar toolbar) {
+    ToolbarCtrl(final Toolbar toolbar) {
         this.toolbar = toolbar;
         this.sharedModel = SharedModel.INSTANCE;
 
