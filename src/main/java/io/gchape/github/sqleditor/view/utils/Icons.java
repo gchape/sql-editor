@@ -14,16 +14,8 @@ public class Icons {
             Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/folder1.png")))
     );
 
-    public static ImageView fileIcon2 = new ImageView(new Image(
-            Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/file1.png")))
-    );
-
-    public static ImageView folderIcon2 = new ImageView(new Image(
-            Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/folder2.png")))
-    );
-
-    public static ImageView tabIcon1 = new ImageView(new Image(
-            Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/tab1.png")))
+    public static ImageView runIcon1 = new ImageView(new Image(
+            Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/run1.png")))
     );
 
     public static ImageView newFolderIcon2() {
@@ -35,6 +27,12 @@ public class Icons {
     public static ImageView newFileIcon2() {
         return new ImageView(new Image(
                 Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/file2.png")))
+        );
+    }
+
+    public static ImageView newTabIcon1() {
+        return new ImageView(new Image(
+                Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/tab1.png")))
         );
     }
 }

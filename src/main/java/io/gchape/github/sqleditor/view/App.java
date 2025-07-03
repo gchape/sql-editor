@@ -15,13 +15,17 @@ public enum App {
 
     App() {
         root = new GridPane();
-        root.getStyleClass().add("editor-view");
 
         projectTreeCtrl = ProjectTreeCtrl.INSTANCE;
         toolbarCtrl = ToolbarCtrl.INSTANCE;
         tabbedSqlEditor = TabbedSqlEditor.INSTANCE;
 
+        setHandlers();
         compose();
+    }
+
+    private void setHandlers() {
+        Toolbar.INSTANCE.setToolbarEventHandlers(toolbarCtrl);
     }
 
     private void compose() {

@@ -182,11 +182,11 @@
     -fx-rotate: 90deg;
 }
 
-.tree-view > .virtual-flow > .corner{
+.tree-view > .virtual-flow > .corner {
     -fx-background-color: transparent;
 }
 
-/* Enhanced Scrollbars */
+/* Global Scrollbar Styling */
 .scroll-bar {
     -fx-background-color: transparent;
     -fx-pref-width: 10;
@@ -224,9 +224,27 @@
 
 .scroll-bar .thumb {
     -fx-background-color: gray;
-    -fx-opacity: 0.2;
+    -fx-opacity: 0.1;
     -fx-background-radius: 0;
     -fx-background-insets: 0;
+}
+
+/* Global Scroll Pane Styling */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.scroll-pane .corner {
+    -fx-background-color: transparent;
 }
 
 /* Content Areas */
@@ -237,32 +255,31 @@
     -fx-border-color: -color-border;
 }
 
-/* Base text area styles */
+/* Common text area base styles */
 .text-area.fringe, .text-area.code-area {
     -fx-padding: 0;
     -fx-border-width: 0;
     -fx-background-insets: 0;
     -fx-border-insets: 0;
-}
-
-/* Unified styling for both fringe and code area */
-.text-area.fringe, .text-area.code-area {
     -fx-background-color: #1a1a1a;
     -fx-control-inner-background: #1a1a1a;
     -fx-highlight-fill: #555555;
     -fx-highlight-text-fill: #fff;
     -fx-font-size: 14px;
-    -fx-text-fill: #32CD32;
     -fx-font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Consolas", monospace;
     -fx-font-weight: normal;
 }
 
-/* Fringe (line numbers) specific sizing */
+/* Specific text area styling */
 .text-area.fringe {
     -fx-min-width: 50.0;
     -fx-max-width: 50.0;
     -fx-pref-width: 50.0;
     -fx-text-fill: #6a6a6a;
+}
+
+.text-area.code-area {
+    -fx-text-fill: #32CD32;
 }
 
 /* Content styling */
@@ -303,18 +320,13 @@
     -fx-control-inner-background: #1a1a1a;
 }
 
-/* Scroll pane styling */
+/* Scroll pane styling - inherits from global */
 .text-area.fringe .scroll-pane, .text-area.code-area .scroll-pane {
     -fx-background-color: #1a1a1a;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
 }
 
 /* Additional fringe scroll pane fixes */
 .text-area.fringe .scroll-pane {
-    -fx-background-color: #1a1a1a;
     -fx-control-inner-background: #1a1a1a;
     -fx-fit-to-width: true;
     -fx-fit-to-height: true;
@@ -322,32 +334,11 @@
 
 .text-area.fringe .scroll-pane .viewport {
     -fx-background-color: #1a1a1a;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
 }
 
-/* Custom scrollbar for code area */
-.text-area.code-area .scroll-bar:horizontal, .text-area.code-area .scroll-bar:vertical, .text-area.code-area .scroll-bar .track {
-    -fx-background-color: transparent;
-    -fx-background-radius: 0;
-}
-
-.text-area.code-area .scroll-bar .thumb {
-    -fx-background-color: gray;
-    -fx-background-radius: 0;
-    -fx-border-radius: 3;
-    -fx-opacity: 0.2;
-}
-
-.text-area.code-area .scroll-bar .increment-button, .text-area.code-area .scroll-bar .decrement-button {
-    -fx-background-color: #111111;
-    -fx-pref-width: 0;
-    -fx-pref-height: 0;
-    -fx-shape: null;
-}
-
-/* Completely hide fringe scrollbars */
-.text-area.fringe .scroll-pane .scroll-bar:vertical, .text-area.fringe .scroll-pane .scroll-bar:horizontal {
+/* Hide fringe scrollbars completely - override global styles */
+.text-area.fringe .scroll-pane .scroll-bar:vertical, .text-area.fringe .scroll-pane .scroll-bar:horizontal,
+.text-area.fringe .scroll-bar .track, .text-area.fringe .scroll-bar .thumb, .text-area.fringe .scroll-bar .increment-button, .text-area.fringe .scroll-bar .decrement-button {
     -fx-pref-width: 0;
     -fx-pref-height: 0;
     -fx-max-width: 0;
@@ -358,16 +349,27 @@
     -fx-background-color: transparent;
 }
 
-.text-area.fringe .scroll-bar .track, .text-area.fringe .scroll-bar .thumb, .text-area.fringe .scroll-bar .increment-button, .text-area.fringe .scroll-bar .decrement-button {
-    -fx-pref-width: 0;
-    -fx-pref-height: 0;
-    -fx-max-width: 0;
-    -fx-max-height: 0;
-    -fx-opacity: 0;
-    -fx-background-color: transparent;
+/* Welcome screen styles */
+.border-pane {
+    -fx-background-color: #1a1a1a;
 }
 
-/* Corner styling */
-.text-area.code-area .corner {
-    -fx-background-color: transparent;
+.shortcut-item {
+    -fx-spacing: 20;
+}
+
+.shortcut-key {
+    -fx-font-weight: 600;
+    -fx-text-fill: #a9b1d6;
+    -fx-font-family: "Inter Regular";
+    -fx-min-width: 80;
+    -fx-alignment: center-right;
+    -fx-font-size: 15;
+}
+
+.shortcut-description {
+    -fx-text-fill: #828997;
+    -fx-alignment: center-right;
+    -fx-font-family: "SF Pro Display Regular";
+    -fx-font-size: 15;
 }

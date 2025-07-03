@@ -1,45 +1,65 @@
 package io.gchape.github.sqleditor.view.builder;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
-public interface Builder<T> {
-    Builder<T> setText(final String title);
-
-    Builder<T> setGraphic(final ImageView imageView);
-
-    Builder<T> addStyleClass(final String styleClass);
-
-    T build();
-
-    class FXButton implements Builder<Button> {
+public interface Builder {
+    class FXButton {
         private final Button button;
 
         public FXButton() {
             button = new Button();
         }
 
-        @Override
-        public Builder<Button> setText(final String title) {
+        public FXButton text(final String title) {
             button.setText(title);
             return this;
         }
 
-        @Override
-        public Builder<Button> setGraphic(final ImageView imageView) {
+        public FXButton graphic(final ImageView imageView) {
             button.setGraphic(imageView);
             return this;
         }
 
-        @Override
-        public Builder<Button> addStyleClass(final String styleClass) {
+        public FXButton styleClass(final String styleClass) {
             button.getStyleClass().add(styleClass);
             return this;
         }
 
-        @Override
         public Button build() {
             return button;
+        }
+    }
+
+    class FXShortcut {
+        private final HBox shortcut;
+        private Label keyLabel;
+        private Label descLabel;
+
+        public FXShortcut() {
+            shortcut = new HBox();
+            shortcut.getStyleClass().add("shortcut-item");
+        }
+
+        public FXShortcut key(final String key) {
+            keyLabel = new Label(key);
+            keyLabel.getStyleClass().add("shortcut-key");
+
+            return this;
+        }
+
+        public FXShortcut description(final String description) {
+            descLabel = new Label(description);
+            descLabel.getStyleClass().add("shortcut-description");
+
+            return this;
+        }
+
+        public HBox build() {
+            shortcut.getChildren().addAll(keyLabel, descLabel);
+            return shortcut;
         }
     }
 }
