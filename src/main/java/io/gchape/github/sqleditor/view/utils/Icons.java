@@ -18,6 +18,10 @@ public class Icons {
             Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/run1.png")))
     );
 
+    public static ImageView searchIcon1 = new ImageView(new Image(
+            Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/search1.png")))
+    );
+
     public static ImageView newFolderIcon2() {
         return new ImageView(new Image(
                 Objects.requireNonNull(Icons.class.getResourceAsStream("/icons/folder2.png")))

@@ -1,8 +1,8 @@
 package io.gchape.github.sqleditor.view.editor;
 
-import com.github.vertical_blank.sqlformatter.SqlFormatter;
-import com.github.vertical_blank.sqlformatter.core.FormatConfig;
-import javafx.scene.control.TextArea;
+import io.gchape.github.sqleditor.view.utils.SqlFormatter;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -10,9 +10,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import javafx.scene.paint.Paint;
+import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.LineNumberFactory;
 
 public enum SqlEditor {
     INSTANCE();
@@ -23,36 +23,22 @@ public enum SqlEditor {
     public final static KeyCombination KEYCODE_SAVE_COMBINATION =
             new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
 
-    private final static FormatConfig FORMAT_CONFIG =
-            FormatConfig.builder()
-                    .indent("    ")
-                    .uppercase(true)
-                    .linesBetweenQueries(2)
-                    .maxColumnLength(100)
-                    .build();
+    private final StringProperty searchText = new SimpleStringProperty("");
 
-    private final TextArea fringe;
     private final HBox root;
-    private final TextArea codeArea;
+    private final CodeArea codeArea;
 
     SqlEditor() {
-        fringe = new TextArea();
-        codeArea = new TextArea();
-        root = new HBox(fringe, codeArea);
+        codeArea = new CodeArea();
+        root = new HBox(codeArea);
 
         configure();
-        setHandlers();
+        bind();
     }
 
-    private void setHandlers() {
-        codeArea.textProperty()
-                .subscribe(this::updateFringe);
-
+    private void bind() {
         codeArea.addEventFilter(KeyEvent.KEY_PRESSED, this::save);
         codeArea.addEventFilter(KeyEvent.KEY_PRESSED, this::formatSql);
-
-        fringe.scrollTopProperty()
-                .bindBidirectional(codeArea.scrollTopProperty());
     }
 
     private void save(final KeyEvent e) {
@@ -65,39 +51,25 @@ public enum SqlEditor {
         if (KEYCODE_FORMAT_COMBINATION.match(e)) {
             e.consume();
 
-            var formattedSql = SqlFormatter.format(codeArea.getText(), FORMAT_CONFIG);
-            codeArea.setText(formattedSql);
+            var formattedSql = (String) SqlFormatter.DEFAULT.prettyPrint(codeArea.getText());
+            codeArea.replaceText(formattedSql);
         }
-    }
-
-    private void updateFringe() {
-        final var text = codeArea.getText();
-        if (text == null || text.isEmpty()) {
-            fringe.setText("1");
-            return;
-        }
-
-        var lines = text.split("\n", -1);
-        var lineNumbers = IntStream
-                .rangeClosed(1, lines.length)
-                .mapToObj(Integer::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
-
-        fringe.setText(lineNumbers);
     }
 
     private void configure() {
-        HBox.setHgrow(fringe, Priority.NEVER);
         HBox.setHgrow(codeArea, Priority.ALWAYS);
 
-        fringe.setMouseTransparent(true);
-        fringe.setFocusTraversable(false);
-
-        fringe.getStyleClass().add("fringe");
         codeArea.getStyleClass().add("code-area");
+        codeArea.setLineHighlighterOn(true);
+        codeArea.setLineHighlighterFill(Paint.valueOf("#262626"));
+        codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
     }
 
     public Region getView() {
         return root;
+    }
+
+    public StringProperty searchTextProperty() {
+        return searchText;
     }
 }

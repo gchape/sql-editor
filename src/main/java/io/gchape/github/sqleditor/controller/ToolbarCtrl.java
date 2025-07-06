@@ -1,28 +1,22 @@
 package io.gchape.github.sqleditor.controller;
 
-import io.gchape.github.sqleditor.controller.handlers.ToolbarEventHandlers;
 import io.gchape.github.sqleditor.model.SharedModel;
 import io.gchape.github.sqleditor.view.Toolbar;
 import io.gchape.github.sqleditor.view.editor.TabbedSqlEditor;
 import io.gchape.github.sqleditor.view.utils.Icons;
+import io.gchape.github.sqleditor.view.utils.Secure;
 import javafx.scene.control.Tab;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
-import java.security.SecureRandom;
-import java.util.Base64;
-
-public enum ToolbarCtrl implements ToolbarEventHandlers {
+public enum ToolbarCtrl {
     INSTANCE(Toolbar.INSTANCE);
 
-    private final SecureRandom secureRandom;
     private final SharedModel sharedModel;
     private final Toolbar toolbar;
 
     ToolbarCtrl(final Toolbar toolbar) {
         this.toolbar = toolbar;
         this.sharedModel = SharedModel.INSTANCE;
-        this.secureRandom = new SecureRandom();
 
         bind();
     }
@@ -32,27 +26,20 @@ public enum ToolbarCtrl implements ToolbarEventHandlers {
                 .bind(toolbar.projectPathProperty());
 
         sharedModel.setTabs(TabbedSqlEditor.INSTANCE.getTabs());
+
+        Toolbar.INSTANCE.onRunQueryMClickedProperty().set((e) -> {
+
+        });
+
+        Toolbar.INSTANCE.onNewFileMClickedProperty().set((e) -> {
+            var tab = new Tab(Secure.base64hash(6));
+            tab.setGraphic(Icons.newTabIcon1());
+
+            SharedModel.INSTANCE.getTabs().add(tab);
+        });
     }
 
     public Region getView() {
         return toolbar.getView();
-    }
-
-    @Override
-    public void onRunQueryBtnClicked(final MouseEvent e) {
-        // TODO
-    }
-
-    @Override
-    public void onNewFileBtnClicked(final MouseEvent e) {
-        Tab tab = new Tab();
-
-        var bytes = new byte[6];
-        secureRandom.nextBytes(bytes);
-        var base64hash = Base64.getEncoder().encodeToString(bytes);
-
-        tab.setText(base64hash);
-        tab.setGraphic(Icons.newTabIcon1());
-        SharedModel.INSTANCE.getTabs().add(tab);
     }
 }

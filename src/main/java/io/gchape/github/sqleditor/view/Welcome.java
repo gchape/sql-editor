@@ -1,6 +1,6 @@
 package io.gchape.github.sqleditor.view;
 
-import io.gchape.github.sqleditor.view.builder.FXControls;
+import io.gchape.github.sqleditor.view.builder.CustomControls;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
@@ -26,37 +26,37 @@ public enum Welcome {
         shortcuts.setVgap(7);
 
         shortcuts.getChildren().addAll(
-                FXControls.newShortcut()
+                CustomControls.newShortcut()
                         .key("Ctrl+N")
                         .description("New SQL File")
                         .build(),
 
-                FXControls.newShortcut()
+                CustomControls.newShortcut()
                         .key("Ctrl+S")
                         .description("Save")
                         .build(),
 
-                FXControls.newShortcut()
+                CustomControls.newShortcut()
                         .key("Ctrl+Enter")
                         .description("Execute Selected")
                         .build(),
 
-                FXControls.newShortcut()
+                CustomControls.newShortcut()
                         .key("Shift+Alt+L")
                         .description("Reformat File")
                         .build(),
 
-                FXControls.newShortcut()
+                CustomControls.newShortcut()
                         .key("Ctrl+F")
                         .description("Find")
                         .build(),
 
-                FXControls.newShortcut()
+                CustomControls.newShortcut()
                         .key("Ctrl+W")
                         .description("Close Tab")
                         .build(),
 
-                FXControls.newShortcut()
+                CustomControls.newShortcut()
                         .key("Ctrl+/")
                         .description("Toggle Comment")
                         .build()

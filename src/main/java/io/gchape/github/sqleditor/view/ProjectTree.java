@@ -33,11 +33,11 @@ public enum ProjectTree {
         });
     }
 
-    private TreeItem<String> renderRecursive(final Path dir) {
-        final var current = new TreeItem<>(dir.getFileName().toString());
+    private TreeItem<String> renderRecursive(final Path projectPath) {
+        final var current = new TreeItem<>(projectPath.getFileName().toString());
         current.setGraphic(Icons.newFolderIcon2());
 
-        try (var children = Files.list(dir)) {
+        try (var children = Files.list(projectPath)) {
             children.forEach(child -> {
                 if (Files.isDirectory(child)) {
                     current.getChildren().add(renderRecursive(child));

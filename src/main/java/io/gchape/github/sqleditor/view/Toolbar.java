@@ -1,17 +1,20 @@
 package io.gchape.github.sqleditor.view;
 
-import io.gchape.github.sqleditor.controller.handlers.ToolbarEventHandlers;
-import io.gchape.github.sqleditor.view.builder.FXControls;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Window;
 
 import static io.gchape.github.sqleditor.view.utils.Icons.*;
 
@@ -19,62 +22,40 @@ public enum Toolbar {
     INSTANCE();
 
     private final ToolBar root;
+    private final Button runQueryBtn;
+    private final Button newFileBtn;
+    private final Button openProjectBtn;
     private final DirectoryChooser directoryChooser;
-    private final StringProperty projectPath;
-    private ToolbarEventHandlers toolbarEventHandlers;
 
-    private Button runQueryBtn;
-    private Button newFileBtn;
-    private Button openProjectBtn;
+    private final StringProperty projectPath = new SimpleStringProperty("../");
+    private final ObjectProperty<EventHandler<? super MouseEvent>> onRunQueryMClicked = new SimpleObjectProperty<>();
+    private final ObjectProperty<EventHandler<? super MouseEvent>> onNewFileMClicked = new SimpleObjectProperty<>();
 
     Toolbar() {
-        this.root = new ToolBar();
-        this.directoryChooser = new DirectoryChooser();
-        this.projectPath = new SimpleStringProperty("../");
+        root = new ToolBar();
+
+        openProjectBtn = new Button("Open Project", folderIcon1);
+        newFileBtn = new Button("New File", fileIcon1);
+        runQueryBtn = new Button("Run Query", runIcon1);
+        directoryChooser = new DirectoryChooser();
 
         configure();
+        bind();
     }
 
-    public void setToolbarEventHandlers(final ToolbarEventHandlers toolbarEventHandlers) {
-        this.toolbarEventHandlers = toolbarEventHandlers;
-        setHandlers();
-    }
-
-    private void setHandlers() {
+    private void bind() {
         openProjectBtn.setOnMouseClicked(e -> {
-            var window = ((Node) e.getSource()).getScene().getWindow();
-            var selectedDir = directoryChooser.showDialog(window);
-
-            if (selectedDir != null) {
-                projectPath.set(selectedDir.getAbsolutePath());
-            }
+            Window window = ((Node) e.getSource()).getScene().getWindow();
+            projectPath.set(directoryChooser.showDialog(window).getAbsolutePath());
         });
 
-        newFileBtn.setOnMouseClicked(toolbarEventHandlers::onNewFileBtnClicked);
-        runQueryBtn.setOnMouseClicked(toolbarEventHandlers::onRunQueryBtnClicked);
+        runQueryBtn.onMouseClickedProperty().bind(onRunQueryMClicked);
+        newFileBtn.onMouseClickedProperty().bind(onNewFileMClicked);
     }
 
     private void configure() {
         root.setCache(true);
         root.setOrientation(Orientation.HORIZONTAL);
-
-        openProjectBtn = FXControls
-                .newButton()
-                .text("Open Project")
-                .graphic(folderIcon1)
-                .build();
-
-        newFileBtn = FXControls
-                .newButton()
-                .text("New File")
-                .graphic(fileIcon1)
-                .build();
-
-        runQueryBtn = FXControls
-                .newButton()
-                .text("Run Query")
-                .graphic(runIcon1)
-                .build();
 
         var spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -87,5 +68,13 @@ public enum Toolbar {
 
     public StringProperty projectPathProperty() {
         return projectPath;
+    }
+
+    public ObjectProperty<EventHandler<? super MouseEvent>> onRunQueryMClickedProperty() {
+        return onRunQueryMClicked;
+    }
+
+    public ObjectProperty<EventHandler<? super MouseEvent>> onNewFileMClickedProperty() {
+        return onNewFileMClicked;
     }
 }

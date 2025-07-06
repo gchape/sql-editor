@@ -1,18 +1,3 @@
-@font-face {
-    font-family: "Inter Regular";
-    src: url("../fonts/Inter-Regular.otf");
-}
-
-@font-face {
-    font-family: "Inter Medium";
-    src: url("../fonts/Inter-Medium.otf");
-}
-
-@font-face {
-    font-family: "SF Pro Display Regular";
-    src: url("../fonts/SFProDisplay-Regular.otf");
-}
-
 * {
     /* Base Colors */
     -color-bg-dark: #2b2b2b;
@@ -63,7 +48,6 @@
     -fx-graphic-text-gap: 6;
     -fx-alignment: center;
     -fx-cursor: hand;
-    -fx-font-family: "SF Pro Display Regular";
     -fx-transition: all 0.2s ease;
 }
 
@@ -115,7 +99,6 @@
 .tab .tab-label {
     -fx-text-fill: -color-text-subtle;
     -fx-alignment: CENTER;
-    -fx-font-family: "Inter Regular", "SF Pro Display Regular", sans-serif;
     -fx-font-size: 12px;
     -fx-font-weight: normal;
     -fx-padding: 0 6;
@@ -128,7 +111,6 @@
 .tab-pane .tab:selected .tab-label {
     -fx-text-fill: -color-text-selected;
     -fx-font-weight: 500;
-    -fx-font-family: "Inter Medium", "SF Pro Display Regular", sans-serif;
 }
 
 .tab-pane:top *.tab-header-area {
@@ -151,7 +133,6 @@
     -fx-background-color: -color-tree-bg;
     -fx-text-fill: -color-text-main;
     -fx-font-size: 13px;
-    -fx-font-family: "Inter Regular", "SF Pro Display Regular", sans-serif;
     -fx-border-width: 0 0 0 0;
     -fx-border-color: -color-border-blue;
 }
@@ -160,7 +141,6 @@
     -fx-text-fill: -color-text-main;
     -fx-background-color: transparent;
     -fx-padding: 4 10;
-    -fx-font-family: "Inter Regular", "SF Pro Display Regular", sans-serif;
     -fx-border-width: 0 0 0 0;
     -fx-border-color: transparent;
 }
@@ -255,98 +235,46 @@
     -fx-border-color: -color-border;
 }
 
-/* Common text area base styles */
-.text-area.fringe, .text-area.code-area {
+/* Base code area styling */
+.code-area {
     -fx-padding: 0;
     -fx-border-width: 0;
     -fx-background-insets: 0;
     -fx-border-insets: 0;
     -fx-background-color: #1a1a1a;
-    -fx-control-inner-background: #1a1a1a;
-    -fx-highlight-fill: #555555;
-    -fx-highlight-text-fill: #fff;
     -fx-font-size: 14px;
-    -fx-font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Consolas", monospace;
     -fx-font-weight: normal;
 }
 
-/* Specific text area styling */
-.text-area.fringe {
-    -fx-min-width: 50.0;
-    -fx-max-width: 50.0;
-    -fx-pref-width: 50.0;
-    -fx-text-fill: #6a6a6a;
+/* Actual rendered text in the code area */
+.code-area .text {
+    -fx-fill: #b0b0b0; /* less bright text */
 }
 
-.text-area.code-area {
-    -fx-text-fill: #32CD32;
-}
-
-/* Content styling */
-.text-area.fringe .content {
-    -fx-padding: 8px 8px 8px 4px;
-    -fx-text-alignment: right;
-    -fx-border-color: #333333;
-    -fx-border-width: 0 1px 0 0;
-    -fx-border-style: solid;
-    -fx-background-radius: 0;
+/* Line numbers styling */
+.code-area .lineno {
+    -fx-font-size: 12px;
+    -fx-padding: 0 8px 0 4px;
     -fx-background-color: #1a1a1a;
+    -fx-text-fill: #555555;
+    -fx-font-weight: 500;
 }
 
-.text-area.code-area .content {
-    -fx-padding: 8px 12px;
-    -fx-line-spacing: 3px;
-    -fx-background-radius: 0;
+/* Current line highlight */
+.code-area .caret-line {
+    -fx-background-color: #2a2a2a;
 }
 
-/* Enhanced selection styling */
-.text-area.fringe .text, .text-area.code-area .text {
-    -fx-highlight-fill: #00ff00;
-    -fx-highlight-text-fill: #000000;
-    -fx-selection-fill: #00ff00;
-    -fx-selection-text-fill: #000000;
+/* Selection colors */
+.code-area .text-highlight {
+    -fx-fill: black;
+    -fx-background-color: #999999;
 }
 
-/* Remove all focus effects while maintaining functionality */
-.text-area.fringe:focused, .text-area.code-area:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-    -fx-background-insets: 0;
-    -fx-border-color: transparent;
-    -fx-effect: none;
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
-    -fx-background-color: #1a1a1a;
-    -fx-control-inner-background: #1a1a1a;
-}
-
-/* Scroll pane styling - inherits from global */
-.text-area.fringe .scroll-pane, .text-area.code-area .scroll-pane {
-    -fx-background-color: #1a1a1a;
-}
-
-/* Additional fringe scroll pane fixes */
-.text-area.fringe .scroll-pane {
-    -fx-control-inner-background: #1a1a1a;
-    -fx-fit-to-width: true;
-    -fx-fit-to-height: true;
-}
-
-.text-area.fringe .scroll-pane .viewport {
-    -fx-background-color: #1a1a1a;
-}
-
-/* Hide fringe scrollbars completely - override global styles */
-.text-area.fringe .scroll-pane .scroll-bar:vertical, .text-area.fringe .scroll-pane .scroll-bar:horizontal,
-.text-area.fringe .scroll-bar .track, .text-area.fringe .scroll-bar .thumb, .text-area.fringe .scroll-bar .increment-button, .text-area.fringe .scroll-bar .decrement-button {
-    -fx-pref-width: 0;
-    -fx-pref-height: 0;
-    -fx-max-width: 0;
-    -fx-max-height: 0;
-    -fx-min-width: 0;
-    -fx-min-height: 0;
-    -fx-opacity: 0;
-    -fx-background-color: transparent;
+/* Caret styling */
+.code-area .caret {
+    -fx-stroke: #e0e0e0;
+    -fx-stroke-width: 1.5px;
 }
 
 /* Welcome screen styles */
@@ -361,7 +289,6 @@
 .shortcut-key {
     -fx-font-weight: 600;
     -fx-text-fill: #a9b1d6;
-    -fx-font-family: "Inter Regular";
     -fx-min-width: 80;
     -fx-alignment: center-right;
     -fx-font-size: 15;
@@ -370,6 +297,105 @@
 .shortcut-description {
     -fx-text-fill: #828997;
     -fx-alignment: center-right;
-    -fx-font-family: "SF Pro Display Regular";
     -fx-font-size: 15;
+}
+
+/* Search Bar */
+.search-bar {
+    -fx-background-color: #242424; /* Slightly lighter than text area #1a1a1a */
+    -fx-padding: 0;
+    -fx-max-height: 40;
+    -fx-pref-height: 40;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #333333;
+    -fx-spacing: 0;
+    -fx-alignment: center;
+}
+
+.search-field {
+    -fx-background-color: #242424;
+    -fx-control-inner-background: #242424;
+    -fx-text-fill: #8a9ba8;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-padding: 6 12;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-highlight-fill: #555555;
+    -fx-highlight-text-fill: #fff;
+    -fx-prompt-text-fill: #6a6a6a;
+    -fx-background-radius: 0;
+}
+
+/* Remove focus effects from search area */
+.search-field:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-effect: none;
+    -fx-background-color: #242424;
+    -fx-control-inner-background: #242424;
+}
+
+/* Search area content styling */
+.search-field .content {
+    -fx-padding: 6 12;
+    -fx-background-radius: 0;
+    -fx-background-color: #242424;
+}
+
+/* Search area text selection */
+.search-field .text {
+    -fx-highlight-fill: #00ff00;
+    -fx-highlight-text-fill: #000000;
+    -fx-selection-fill: #00ff00;
+    -fx-selection-text-fill: #000000;
+}
+
+/* Enhanced search button styling */
+.search-button {
+    -fx-background-color: #242424;
+    -fx-border-color: #333333;
+    -fx-border-width: 0 0 0 1;
+    -fx-padding: 8 12;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-cursor: hand;
+    -fx-min-width: 40;
+    -fx-pref-width: 40;
+    -fx-alignment: center;
+}
+
+.search-button:hover {
+    -fx-background-color: #2e2e2e; /* Slightly lighter on hover */
+    -fx-border-color: -color-accent;
+}
+
+.search-button:pressed {
+    -fx-background-color: -color-accent;
+    -fx-border-color: -color-accent;
+}
+
+/* Search bar scroll pane styling (if needed) */
+.search-field .scroll-pane {
+    -fx-background-color: #242424;
+    -fx-control-inner-background: #242424;
+}
+
+.search-field .scroll-pane .viewport {
+    -fx-background-color: #242424;
+}
+
+/* Hide search area scrollbars */
+.search-field .scroll-pane .scroll-bar:vertical,
+.search-field .scroll-pane .scroll-bar:horizontal {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+    -fx-opacity: 0;
 }
